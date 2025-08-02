@@ -1,3 +1,9 @@
+# Week1- Activity 1: Calculate the Factorial of a Number Using a Loop
+ 
+# Develop the first project for MSE800 with using following task:
+# What happens if the user enters 0? Try to handle this case in your code.
+# Try adding error checking for negative numbers.
+ 
 def factorial(number):
   result = 1
   if number == 0: 
