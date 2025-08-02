@@ -8,3 +8,7 @@ __pycache__/
 *.pyd
 *.pyw
 *.pyz
+.python-version
+
+#.vscode
+.vscode/
