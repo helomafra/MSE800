@@ -4,16 +4,7 @@
 # Rewrite the program using a while loop.
 # Also modify it to find the sum of positive odd numbers instead. Print all even numbers as well as the total sum.
 
-def get_valid_input():
-  while True:
-    try:
-      number = int(input("Enter a number: "))
-      if number < 0:
-        print("Error: number must be positive!")
-        continue
-      return number
-    except ValueError:
-      print("Error: Invalid input. Please enter a valid integer number.")
+from utils.get_valid_input import get_valid_input
 
 def get_sum_of_even_numbers(number):
   sum = 0
