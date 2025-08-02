@@ -23,5 +23,4 @@ def get_valid_input():
 if __name__ == "__main__":
   number = get_valid_input()
   result = factorial(number)
-  if result is not None:
-    print(f"Factorial of {number} is {result}")
+  print(f"Factorial of {number} is {result}")
