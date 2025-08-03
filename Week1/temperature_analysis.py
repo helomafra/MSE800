@@ -23,6 +23,7 @@ print(f"Temperatures in Fahrenheit: {temperature_fahrenheit}")
 
 # Find indices where temperature exceeded 20°C
 # Side note: I need the [0] because np.where returns a tuple of arrays. As this is a 1d array, I need the [0] to get the first (and only) array from the tuple.
+# np.where(temperature > 20) with no [0] returns array([2, 3, 5])
 indices_above_20 = np.where(temperature > 20)[0]
 print(f"Days with temperature above 20°C: {indices_above_20}")
 
