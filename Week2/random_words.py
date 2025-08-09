@@ -46,14 +46,6 @@ def getInput():
             print(f"Invalid input: {e}")
             continue
 
-def checkGuess(guess, word, lives):
-    if guess in word.lower():
-        print(f"Correct! {guess} is in the word")
-        return lives
-    else:
-        print(f"Incorrect! {guess} is not in the word. You have {lives} lives left.")
-        return lives - 1
-
 def fill_blanks(word, guessed_letters):
     result = word
     for letter in word:
@@ -62,11 +54,20 @@ def fill_blanks(word, guessed_letters):
     
     return " ".join(result)
 
-def all_letters_guessed(word, guessed_letters):
-    #Returns True if all unique letters in the word have been guessed.
-    return set(word.lower()).issubset(guessed_letters)
+class Guess: 
+    def check_guess(self, guess, word, lives):
+        if guess in word.lower():
+            print(f"Correct! {guess} is in the word")
+            return lives
+        else:
+            print(f"Incorrect! {guess} is not in the word. You have {lives} lives left.")
+            return lives - 1
+
+    def all_letters_guessed(self, word, guessed_letters):
+        return set(word.lower()).issubset(guessed_letters)
 
 def main():
+    guess_class = Guess()
     word = generate_random_word()
     lives = 10
     guessed_letters = set()
@@ -82,12 +83,12 @@ def main():
             print(f"You already guessed '{guess}'! Try a different letter.")
             continue
             
-        lives = checkGuess(guess, word, lives)
+        lives = guess_class.check_guess(guess, word, lives)
         guessed_letters.add(guess)
         print(fill_blanks(word, guessed_letters))
         
         # Check win condition
-        if all_letters_guessed(word, guessed_letters):
+        if guess_class.all_letters_guessed(word, guessed_letters):
             print(f"Congratulations! You win! The word was: {word}")
             break
         
