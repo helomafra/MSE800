@@ -13,7 +13,7 @@ class FileWordsCount:
             return len(content.split())
 
 def main():
-    file_words_count = FileWordsCount("Week3/demo.txt")
+    file_words_count = FileWordsCount("Week3/file_manipulation/demo.txt")
     count = file_words_count.count_words()
     print(f"Total number of words: {count}")
 

@@ -16,7 +16,7 @@ class FileManipulation:
             return content
 
 def main():
-    file_manipulation = FileManipulation("Week3/demo.txt")
+    file_manipulation = FileManipulation("Week3/file_manipulation/demo.txt")
     
     # Print the content of the file before manipulation
     print(f"Content of the file before manipulation: {file_manipulation.read()}")

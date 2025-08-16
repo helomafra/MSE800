@@ -60,7 +60,7 @@ def main():
     # Create processor instance
     processor = BreastCancerDataProcessor('Week3/breast_cancer_data/breast_cancer_data.csv')
     
-    # Load data
+    # Load data from
     processor.load_data()
     
     # Convert to Parquet
