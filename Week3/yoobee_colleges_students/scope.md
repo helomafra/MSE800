@@ -30,5 +30,9 @@ The DB will store students, lecturers, the courses offered, and student enrollme
 - **Role**: Join that captures which Student takes which ClassOffering and their final outcome
 - **Key attrs**: `enrollment_id` (PK), `student_id` (FK → Student), `class_id` (FK → ClassOffering), `enrolled_on` (TEXT), `status` (TEXT), `final_grade` (INT)
 
+## Database Schema Diagram
+
+![Yoobee Students Database Schema](/assets/yoobee_students_diagram.png)
+
 
 

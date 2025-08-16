@@ -1,0 +1,3 @@
+Week 3 - Activity 5: update the sample code "Sample_code_SQLite3"
+Please add a new table named "Students" with three columns: Stu_ID, Stu_name, and Stu_address. Insert two sample records into Students, then display all rows from both the Users and Students tables.
+ 
