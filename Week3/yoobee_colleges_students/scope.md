@@ -35,4 +35,40 @@ The DB will store students, lecturers, the courses offered, and student enrollme
 ![Yoobee Students Database Schema](/assets/yoobee_students_diagram.png)
 
 
+<!-- Week 4 - Activity 1: Design use case diagram
+Step 1: Write the number of actors and use cases for your college project, defining the scope of the project in the same way as the activity completed in Week 3 for your college. 
+  -->
+ 
+## Use Case Diagram 
 
+### Actors: 
+  - **Student** - People studying at YB College who can view their enrollments and grades
+  - **Lecturer** - Staff who teach classes and can manage class offerings and grades
+  - **Admin** - System administrators who manage all aspects of the college system
+
+### Use Cases 
+
+**Student Use Cases:**
+- View Personal Information
+- View Enrollments
+- View Grades
+- View Available Courses
+
+**Lecturer Use Cases:**
+- View Assigned Classes
+- View Student Enrollments
+- Update Student Grades
+- View Course Information
+
+**Admin Use Cases:**
+- Manage Students (Add, View, Delete, Update)
+- Manage Lecturers (Add, View, Delete, Update)
+- Manage Courses (Add, View, Delete, Update)
+- Manage Class Offerings (Add, View, Delete, Update)
+- Manage Enrollments (Add, View, Delete, Update)
+- View All System Data
+
+**Shared Use Cases:**
+- View Course Catalog
+- View Class Schedules
+- Search Records
