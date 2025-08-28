@@ -36,7 +36,7 @@
 
 ## Class Diagram
 
-![Class Diagram](/assets/class_diagram.svg)
+![Class Diagram](/assets/class_diagram.png)
 
 ## Activity Diagram 
 
