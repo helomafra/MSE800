@@ -1,4 +1,4 @@
-# Use Case Diagram and Activity Diagram 
+# Use Case Diagram, Class Diagram and Activity Diagram
 
 ![Yoobee Students Use Case Diagram](/assets/UML_use_case.png)
 
@@ -34,7 +34,10 @@
 - **View Class Schedules:** User requests scheduling information, and the system retrieves and displays class timetables, room assignments, and instructor details.
 - **Search Records:** User enters search criteria, and the system searches across relevant databases and returns matching records based on specified parameters.
 
+## Class Diagram
+
+![Class Diagram](/assets/class_diagram.svg)
+
 ## Activity Diagram 
 
 ![Activity Diagram](/assets/activity_diagram.png)
-
