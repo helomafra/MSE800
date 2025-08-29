@@ -2,4 +2,4 @@
 
 ### Sequence diagram for Sign Up
 
-![Sequence Diagram Sign Up](../assets/sign_up_sequencial_diagram.png)
+![Sequence Diagram Sign Up](../assets/sign_up_diagram.png)
