@@ -45,14 +45,26 @@ class GeneralStaff(Person):
     super().display()
     print(f"Tax Code: {self.tax_code}, Pay Rate: {self.pay_rate}, Role: General Staff")
 
+class Course(Person):
+  def __init__(self, id, course_name, course_code):
+    super().__init__(id)
+    self.course_name = course_name
+    self.course_code = course_code
+  
+  def display(self):
+    super().display()
+    print(f"Course Name: {self.course_name}, Course Code: {self.course_code}")
+
 def main():
   student = Student("John Doe", "123 Main St", 20, "1234567890", "A")
   academics = Academics("Jane Doe", "456 Main St", 30, "1234567890", "1234567890", 100000)
   general_staff = GeneralStaff("Jim Doe", "789 Main St", 40, "1234567890", "1234567890", 100000)
+  course = Course("1234567890", "Introduction to Programming", "CS101")
 
   student.display()
   academics.display()
   general_staff.display()
+  course.display()
 
 if __name__ == "__main__":
     main()
