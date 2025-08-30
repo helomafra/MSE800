@@ -7,45 +7,43 @@
 # General staffs have: name, address, age, ID, tax code, pay rate, etc.
 
 class Person:
-  def __init__(self, name, address, age):
+  def __init__(self, name, address, age, id):
     self.name = name
     self.age = age
     self.address = address
+    self.id = id
 
   def display(self):
-    print(f"Name: {self.name}, Age: {self.age}, Address: {self.address}")
+    print(f"Name: {self.name}, Age: {self.age}, Address: {self.address}, ID: {self.id}")
 
 class Student(Person):
   def __init__(self, name, address, age, id, academic_record):
-    super().__init__(name, address, age)
-    self.id = id
+    super().__init__(name, address, age, id)
     self.academic_record = academic_record
 
   def display(self):
     super().display()
-    print(f"ID: {self.id}, Academic Record: {self.academic_record}, Role: Student")
+    print(f"Academic Record: {self.academic_record}, Role: Student")
 
 class Academics(Person):
   def __init__(self, name, address, age, id, tax_code, salary):
-    super().__init__(name, address, age)
-    self.id = id
+    super().__init__(name, address, age, id)
     self.tax_code = tax_code
     self.salary = salary
 
   def display(self):
     super().display()
-    print(f"ID: {self.id}, Tax Code: {self.tax_code}, Salary: {self.salary}, Role: Academics")
+    print(f"Tax Code: {self.tax_code}, Salary: {self.salary}, Role: Academics")
 
 class GeneralStaff(Person):
   def __init__(self, name, address, age, id, tax_code, pay_rate):
-    super().__init__(name, address, age)
-    self.id = id
+    super().__init__(name, address, age, id)
     self.tax_code = tax_code
     self.pay_rate = pay_rate
 
   def display(self):
     super().display()
-    print(f"ID: {self.id}, Tax Code: {self.tax_code}, Pay Rate: {self.pay_rate}, Role: General Staff")
+    print(f"Tax Code: {self.tax_code}, Pay Rate: {self.pay_rate}, Role: General Staff")
 
 def main():
   student = Student("John Doe", "123 Main St", 20, "1234567890", "A")
