@@ -1,7 +1,10 @@
+from abc import ABC, abstractmethod
+
 # Abstract base class for payment processors
-class PaymentProcessor:
+class PaymentProcessor(ABC):
+    @abstractmethod
     def process_payment(self, amount):
-        raise NotImplementedError("Subclasses must implement process_payment method")
+        pass
 
 # Concrete payment processor implementations
 class PayPalPayment(PaymentProcessor):
@@ -21,20 +24,24 @@ class CreditCardPayment(PaymentProcessor):
 
 # Factory class for creating payment processors
 class PaymentFactory:
-    @staticmethod
-    def create_payment_processor(payment_method):
-        #create payment processor based on payment method
-        if payment_method == "paypal":
-            return PayPalPayment()
-        elif payment_method == "stripe":
-            return StripePayment()
-        elif payment_method == "credit_card":
-            return CreditCardPayment()
-        else:
+    _processors = {
+        "paypal": PayPalPayment,
+        "stripe": StripePayment,
+        "credit_card": CreditCardPayment
+    }
+    
+    @classmethod
+    def create_payment_processor(cls, payment_method):
+        processor_class = cls._processors.get(payment_method)
+        if not processor_class:
             raise ValueError(f"Invalid payment method: {payment_method}")
+        return processor_class()
+    
+    @classmethod
+    def register_processor(cls, method_name, processor_class):
+        cls._processors[method_name] = processor_class
 
 # Checkout function using the factory
 def checkout(payment_method, amount):
-    #process payment using the factory pattern
     processor = PaymentFactory.create_payment_processor(payment_method)
     return processor.process_payment(amount)

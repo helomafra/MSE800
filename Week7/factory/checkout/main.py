@@ -26,12 +26,5 @@ def main():
         else:
             print("❌ Payment failed!")
     
-    print("\n" + "="*50)
-    print("FACTORY PATTERN BENEFITS:")
-    print("✅ Encapsulates object creation")
-    print("✅ Easy to add new payment methods")
-    print("✅ Single responsibility principle")
-    print("="*50)
-
 if __name__ == "__main__":
     main()
