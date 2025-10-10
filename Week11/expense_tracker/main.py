@@ -8,6 +8,9 @@ Calculate Total Expense : Compute and display the total amount of all recorded e
 """
 
 from expense_tracker import ExpenseTracker
+import doctest
+import expense
+import expense_tracker
 
 def main():
     print("=== Personal Expense Tracker ===")
@@ -36,5 +39,9 @@ def main():
             print("Invalid option. Please choose 1, 2, or 3.")
 
 if __name__ == "__main__":
+    print("=== Running Doctests ===")
+    doctest.testmod(expense, verbose=True)
+    doctest.testmod(expense_tracker, verbose=True)
+    print("\n" + "="*50)
     main()
  

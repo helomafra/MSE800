@@ -10,6 +10,17 @@ class ExpenseTracker:
         return expense
     
     def calculate_total(self):
+        """
+        Calculates the total amount of all expenses.
+        
+        >>> tracker = ExpenseTracker()
+        >>> tracker.calculate_total()
+        0
+        >>> _ = tracker.add_expense("Coffee", 3.50)
+        >>> _ = tracker.add_expense("Lunch", 15.00)
+        >>> tracker.calculate_total()
+        18.5
+        """
         return sum(expense.amount for expense in self.expenses)
 
     def __str__(self):
