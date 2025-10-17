@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🌡️ Temperature Converter</h1>
+        
+        <form id="converterForm">
+            <div class="form-group">
+                <label for="temperature">Temperature:</label>
+                <input type="number" id="temperature" step="0.01" required placeholder="Enter temperature">
+            </div>
+            
+            <div class="form-group">
+                <label for="fromUnit">From:</label>
+                <select id="fromUnit" required>
+                    <option value="">Select unit</option>
+                    <option value="celsius">Celsius (°C)</option>
+                    <option value="fahrenheit">Fahrenheit (°F)</option>
+                    <option value="kelvin">Kelvin (K)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="toUnit">To:</label>
+                <select id="toUnit" required>
+                    <option value="">Select unit</option>
+                    <option value="celsius">Celsius (°C)</option>
+                    <option value="fahrenheit">Fahrenheit (°F)</option>
+                    <option value="kelvin">Kelvin (K)</option>
+                </select>
+            </div>
+            
+            <button type="submit">Convert</button>
+        </form>
+        
+        <div id="result" class="result"></div>
+        
+    </div>
+
+    <script>
+        document.getElementById('converterForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const temperature = document.getElementById('temperature').value;
+            const fromUnit = document.getElementById('fromUnit').value;
+            const toUnit = document.getElementById('toUnit').value;
+            const resultDiv = document.getElementById('result');
+            
+            if (!temperature || !fromUnit || !toUnit) {
+                showResult('Please fill in all fields', true);
+                return;
+            }
+            
+            if (fromUnit === toUnit) {
+                showResult('Please select different units for conversion', true);
+                return;
+            }
+            
+            try {
+                const response = await fetch('/convert', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        temperature: parseFloat(temperature),
+                        from_unit: fromUnit,
+                        to_unit: toUnit
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    const unitSymbols = {
+                        'celsius': '°C',
+                        'fahrenheit': '°F',
+                        'kelvin': 'K'
+                    };
+                    
+                    const resultText = `${temperature} ${unitSymbols[fromUnit]} = ${data.result} ${unitSymbols[toUnit]}`;
+                    showResult(resultText, false);
+                } else {
+                    showResult('Error: ' + data.error, true);
+                }
+            } catch (error) {
+                showResult('Error: ' + error.message, true);
+            }
+        });
+        
+        function showResult(message, isError) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = message;
+            resultDiv.className = isError ? 'result error' : 'result';
+            resultDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
