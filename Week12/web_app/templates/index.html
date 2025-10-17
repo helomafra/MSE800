@@ -3,39 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baked Cookies Recipe</title>
+    <title>Image Upload App</title>
 </head>
 <body>
-    <h1>Baked Cookies Recipe</h1>
+    <h1>Image Upload Application</h1>
     
-    <img src="{{ url_for('static', filename='cookies.png') }}" alt="Baked Cookies Image" width="400">
+    <h2>Upload an Image</h2>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <br><br>
+        <input type="submit" value="Upload Image">
+    </form>
+    
+    <!-- Use Jinja2 (templating engine from flask) to conditionally display the uploaded image or error message -->
+    {% if uploaded_image %}
+        <h2>Uploaded Image:</h2>
+        <img src="{{ url_for('static', filename='uploads/' + uploaded_image) }}" alt="Uploaded Image" width="400" onerror="this.style.display='none'">
+    {% elif show_error %}
+        <p style="color:red;"><strong>Error: Could not upload image, check file extension (png, jpg, jpeg, gif, bmp)</strong></p>
+    {% endif %}
     
     <p>
-        <strong>Simple Chocolate Chip Cookies Recipe:</strong><br><br>
-        <b>Ingredients:</b>
-        <ul>
-            <li>1 cup butter, softened</li>
-            <li>1 cup white sugar</li>
-            <li>1 cup packed brown sugar</li>
-            <li>2 eggs</li>
-            <li>2 tsp vanilla extract</li>
-            <li>3 cups all-purpose flour</li>
-            <li>1 tsp baking soda</li>
-            <li>2 tsp hot water</li>
-            <li>0.5 tsp salt</li>
-            <li>2 cups semisweet chocolate chips</li>
-        </ul>
-        <br>
-        <b>Directions:</b>
-        <ol>
-            <li>Preheat oven to 350&deg;F (175&deg;C).</li>
-            <li>Cream together the butter and both sugars. Beat in eggs one at a time, then stir in vanilla.</li>
-            <li>Dissolve baking soda in hot water and add to batter along with salt.</li>
-            <li>Stir in flour and chocolate chips.</li>
-            <li>Drop by large spoonfuls onto ungreased pans.</li>
-            <li>Bake for about 10 minutes, or until edges are nicely browned.</li>
-        </ol>
-        <br>Enjoy your homemade cookies!
+        <a href="https://flask.palletsprojects.com/" target="_blank">Flask Documentation</a>
     </p>
 
 </body>

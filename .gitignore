@@ -12,3 +12,6 @@ __pycache__/
 
 #.vscode
 .vscode/
+
+# Week12
+Week12/web_app/static/uploads/
