@@ -15,3 +15,6 @@ __pycache__/
 
 # Week12
 Week12/web_app/static/uploads/
+
+# Env
+.env
