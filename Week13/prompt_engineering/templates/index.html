@@ -63,6 +63,99 @@
             padding: 12px 16px;
             border-radius: 18px;
             word-wrap: break-word;
+            line-height: 1.6;
+        }
+
+        .message-content h1, .message-content h2, .message-content h3 {
+            margin: 15px 0 10px 0;
+            color: #333;
+        }
+
+        .message-content h1 {
+            font-size: 1.5em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 5px;
+        }
+
+        .message-content h2 {
+            font-size: 1.3em;
+            color: #667eea;
+        }
+
+        .message-content h3 {
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .message-content strong, .message-content b {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .message-content ul, .message-content ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .message-content li {
+            margin: 5px 0;
+        }
+
+        .message-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .message-content th, .message-content td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e1e5e9;
+        }
+
+        .message-content th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: bold;
+        }
+
+        .message-content tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .message-content tr:hover {
+            background-color: #e3f2fd;
+        }
+
+        .message-content .day-section {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .message-content .budget-highlight {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .message-content .activity-item {
+            background: white;
+            border: 1px solid #e1e5e9;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
         }
 
         .message.user .message-content {
@@ -97,6 +190,12 @@
             font-size: 16px;
             outline: none;
             transition: border-color 0.3s;
+            resize: none;
+            min-height: 50px;
+            max-height: 150px;
+            font-family: inherit;
+            line-height: 1.4;
+            overflow: hidden;
         }
 
         .chat-input:focus {
@@ -162,13 +261,13 @@
         
         <div class="chat-input-container">
             <form class="chat-input-form" id="chatForm">
-                <input 
-                    type="text" 
+                <textarea 
                     class="chat-input" 
                     id="messageInput" 
                     placeholder="Ask about destinations, itineraries, or travel planning..."
                     autocomplete="off"
-                >
+                    rows="1"
+                ></textarea>
                 <button type="submit" class="send-button" id="sendButton">
                     Send
                 </button>
@@ -189,11 +288,48 @@
             
             const contentDiv = document.createElement('div');
             contentDiv.className = 'message-content';
-            contentDiv.textContent = content;
+            
+            if (isUser) {
+                // For user messages, use textContent to prevent HTML injection
+                contentDiv.textContent = content;
+            } else {
+                // For bot messages, use innerHTML to allow formatting
+                contentDiv.innerHTML = formatMessage(content);
+            }
             
             messageDiv.appendChild(contentDiv);
             chatMessages.appendChild(messageDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function formatMessage(content) {
+            // Convert markdown-like formatting to HTML
+            let formatted = content
+                // Bold text **text** or *text*
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                // Headers
+                .replace(/^### (.*$)/gm, '<h3>$1</h3>')
+                .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+                .replace(/^# (.*$)/gm, '<h1>$1</h1>')
+                // Lists
+                .replace(/^\* (.*$)/gm, '<li>$1</li>')
+                .replace(/^- (.*$)/gm, '<li>$1</li>')
+                // Line breaks
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/\n/g, '<br>');
+            
+            // Wrap list items in ul tags
+            formatted = formatted.replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>');
+            
+            // Wrap paragraphs
+            formatted = '<p>' + formatted + '</p>';
+            
+            // Clean up empty paragraphs
+            formatted = formatted.replace(/<p><\/p>/g, '');
+            formatted = formatted.replace(/<p><br><\/p>/g, '');
+            
+            return formatted;
         }
 
         function showError(message) {
@@ -217,6 +353,7 @@
             // Add user message
             addMessage(message, true);
             messageInput.value = '';
+            autoResize(); // Reset textarea height
             
             setLoading(true);
 
@@ -254,6 +391,17 @@
                 e.preventDefault();
                 sendMessage();
             }
+        });
+
+        // Auto-resize textarea
+        function autoResize() {
+            messageInput.style.height = 'auto';
+            messageInput.style.height = Math.min(messageInput.scrollHeight, 150) + 'px';
+        }
+
+        messageInput.addEventListener('input', autoResize);
+        messageInput.addEventListener('paste', () => {
+            setTimeout(autoResize, 0);
         });
 
         // Focus on input when page loads
